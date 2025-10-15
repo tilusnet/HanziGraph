@@ -5,6 +5,7 @@ services:
       context: .
     environment:
       NODE_ENV: production
+      USE_FIREBASE: false
     ports:
       - 8000:8000
 

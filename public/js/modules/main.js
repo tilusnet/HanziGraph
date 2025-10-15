@@ -15,7 +15,11 @@ import { initialize as searchInit, search } from "./search.js";
 import { initialize as fileAnalysisInitialize } from "./file-analysis.js"
 
 // Set to false to enable running more simply, e.g. via running `python3 -m http.server` in public/.
-const USE_FIREBASE = true;
+const process = require('node:process');
+var USE_FIREBASE = process.env['USE_FIREBASE'];
+if (USE_FIREBASE == null)
+    USE_FIREBASE = true;
+
 
 const hanziSearchForm = document.getElementById('hanzi-choose');
 
