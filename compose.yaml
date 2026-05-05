@@ -4,7 +4,8 @@ services:
     build:
       context: .
     environment:
-      NODE_ENV: production
+      - NODE_ENV=production
+      - SERVER_BASE_PATH
     ports:
       - 8000:8000
 # Uncomment volumes below for custom wordlists and sentences - see README.Docker.md for details:

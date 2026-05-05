@@ -69,11 +69,14 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/public ./public
 COPY --from=build /usr/src/app/scripts ./scripts
 
+# Make the entrypoint script available as executable
+COPY --chmod=755 entrypoint.sh .
+
 # Expose the port that the application listens on.
 EXPOSE 8000
 
 # Change active directory for application
 WORKDIR /usr/src/app/public
 
-# Run the application.
-ENTRYPOINT ["python3", "../scripts/server_with_rewrites.py"]
+# Run the application entrypoint script
+ENTRYPOINT ["./../entrypoint.sh"]

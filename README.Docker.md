@@ -62,3 +62,17 @@ Just like with wordlists, activate your custom sentences:
 ```
 
 Finally, start the container with `docker compose`.
+
+
+### Reverse Proxy and Custom Base Path
+
+You might want to host your server under a custom URL path for your reverse proxy, e.g. under  
+`https://my-domain.org/my/custom/path/`
+
+Either set `SERVER_BASE_PATH` in a `.env` or directly, like so:
+
+```commandline
+SERVER_BASE_PATH=/my/custom/path docker compose 
+```
+
+Don't forget the leading slash. A trailing slash is optional.
