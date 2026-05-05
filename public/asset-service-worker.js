@@ -1,5 +1,6 @@
 // TODO: separate caches for code vs data?
 const cacheName = 'hanzigraph-7cac44f10125b13c9c0fd59507befd26d563c4a2';
+const BASE_PATH = new URL(self.location.href).searchParams.get('basePath') || '';
 self.addEventListener('fetch', (e) => {
     if (e.request.method === 'GET' && !e.request.url.includes('firestore')) {
         e.respondWith((async () => {
@@ -33,16 +34,16 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("install", (event) => {
     event.waitUntil(caches.open(cacheName).then((cache) =>
         cache.addAll([
-            "/",
-            "/index.html",
-            "/css/hanzi-graph.css",
+            BASE_PATH + "/",
+            BASE_PATH + "/index.html",
+            BASE_PATH + "/css/hanzi-graph.css",
             // TODO: inline this
-            "/js/data-load.js",
+            BASE_PATH + "/js/data-load.js",
             // TODO: add to bundle
-            "/js/external/cytoscape.min.js",
-            "/manifest.json",
-            "/js/bundle.js",
-            "/js/modules/search-suggestions-worker.js",
+            BASE_PATH + "/js/external/cytoscape.min.js",
+            BASE_PATH + "/manifest.json",
+            BASE_PATH + "/js/bundle.js",
+            BASE_PATH + "/js/modules/search-suggestions-worker.js",
         ]),
     ),
     );

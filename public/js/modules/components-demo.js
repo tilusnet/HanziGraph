@@ -424,7 +424,7 @@ function renderComponents(word, container, skipState) {
     if (!skipState) {
         const joinedWord = word.join('');
         hanziBox.value = joinedWord;
-        const newUrl = `/components/${joinedWord}`;
+        const newUrl = `${window.BASE_PATH || ''}/components/${joinedWord}`;
         document.title = `${joinedWord} | Components`;
         history.pushState({
             word: joinedWord,
@@ -498,20 +498,20 @@ function parseUrl(path) {
 }
 const notFoundElement = document.getElementById('not-found-message');
 Promise.all([
-    fetch('/data/components/components.json')
+    fetch(`${window.BASE_PATH || ''}/data/components/components.json`)
         .then(response => response.json())
         .then(data => components = data),
-    fetch('/data/components/mandarin-defs.json')
+    fetch(`${window.BASE_PATH || ''}/data/components/mandarin-defs.json`)
         .then(response => response.json())
         .then(data => definitions = data),
-    fetch('/data/simplified/character_freq_list.json')
+    fetch(`${window.BASE_PATH || ''}/data/simplified/character_freq_list.json`)
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < data.length; i++) {
                 simplifiedRanks[data[i]] = i;
             }
         }),
-    fetch('/data/traditional/character_freq_list.json')
+    fetch(`${window.BASE_PATH || ''}/data/traditional/character_freq_list.json`)
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < data.length; i++) {

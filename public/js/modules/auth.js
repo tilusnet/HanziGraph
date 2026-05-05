@@ -7,7 +7,7 @@ if (document.location.href.includes('login')) {
     const googleProvider = new GoogleAuthProvider();
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            document.location.href = "/";
+            document.location.href = (window.BASE_PATH || '') + "/";
         }
     });
 
@@ -24,7 +24,7 @@ if (document.location.href.includes('login')) {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then((_) => {
-                document.location.href = "/";
+                document.location.href = (window.BASE_PATH || '') + "/";
             })
             .catch((_) => {
                 document.getElementById('error-message').style.visibility = 'visible';
@@ -38,7 +38,7 @@ if (document.location.href.includes('login')) {
         const password = document.getElementById('register-password').value;
         createUserWithEmailAndPassword(auth, email, password)
             .then((_) => {
-                document.location.href = "/";
+                document.location.href = (window.BASE_PATH || '') + "/";
             })
             .catch((_) => {
                 document.getElementById('error-message').style.visibility = 'visible';
@@ -89,7 +89,7 @@ if (document.location.href.includes('privacy')) {
             const user = auth.currentUser;
             deleteUser(user).then(() => {
                 alert('Your account has been deleted.');
-                document.location.href = "/";
+                document.location.href = (window.BASE_PATH || '') + "/";
             }).catch((error) => {
                 alert(`Error: ${error}. You may need to sign in first, to avoid fraudulent deletions. Email hanzigraph@googlegroups.com for support.`);
             });

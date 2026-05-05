@@ -113,7 +113,7 @@ function switchGraph() {
         // this also ensures the change is clear to the user (to the extent the initial page is clear)
         // unfortunately, it also may make offline use slightly worse
         // TODO: make offline behavior better
-        document.location.href = `/${prefix}`;
+        document.location.href = `${window.BASE_PATH || ''}/${prefix}`;
     }
 }
 
@@ -279,17 +279,18 @@ function getPathsForOfflineUse() {
     const activeGraph = getActiveGraph();
 
     let paths = [];
-    paths.push(`/data/${activeGraph.prefix}/sentences.json`);
-    paths.push(`/data/${activeGraph.prefix}/definitions.json`);
-    paths.push('/data/components/components.json');
-    paths.push(`/data/${activeGraph.prefix}/wordlist.json`);
+    const base = window.BASE_PATH || '';
+    paths.push(`${base}/data/${activeGraph.prefix}/sentences.json`);
+    paths.push(`${base}/data/${activeGraph.prefix}/definitions.json`);
+    paths.push(`${base}/data/components/components.json`);
+    paths.push(`${base}/data/${activeGraph.prefix}/wordlist.json`);
     if (activeGraph.hasCoverage === 'all') {
-        paths.push(`/data/${activeGraph.prefix}/coverage_stats.json`);
-        paths.push(`/data/${activeGraph.prefix}/character_freq_list.json`);
+        paths.push(`${base}/data/${activeGraph.prefix}/coverage_stats.json`);
+        paths.push(`${base}/data/${activeGraph.prefix}/character_freq_list.json`);
     }
     for (let i = 0; i < activeGraph.partitionCount; i++) {
-        paths.push(`/${activeGraph.definitionsAugmentPath}/${i}.json`);
-        paths.push(`/${activeGraph.englishPath}/${i}.json`);
+        paths.push(`${base}/${activeGraph.definitionsAugmentPath}/${i}.json`);
+        paths.push(`${base}/${activeGraph.englishPath}/${i}.json`);
     }
     return paths;
 }
@@ -303,6 +304,10 @@ function getSelectedGraph(storedOpts, urlOpts) {
 }
 // TODO(refactor): does this belong here?
 function parseUrl(path) {
+    const base = window.BASE_PATH || '';
+    if (base && path.startsWith(base)) {
+        path = path.slice(base.length);
+    }
     if (path[0] === '/') {
         path = path.substring(1);
     }

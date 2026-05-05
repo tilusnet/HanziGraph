@@ -252,7 +252,7 @@ async function getCollocations(word) {
     }
     const activeGraph = getActiveGraph();
     try {
-        const response = await fetch(`/${activeGraph.collocationsPath}/${getPartition(word, activeGraph.partitionCount)}.json`);
+        const response = await fetch(`${window.BASE_PATH || ''}/${activeGraph.collocationsPath}/${getPartition(word, activeGraph.partitionCount)}.json`);
         let data = await response.json();
         if (word in data) {
             // could cache every collocation in `data`, but will allow service worker cache instead of growing memory that way.

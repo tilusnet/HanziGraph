@@ -8,10 +8,11 @@
     <meta name="description"
         content="Learn how Chinese characters are composed, and how this composition influences their pronunciation.">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="/js/external/cytoscape.min.js"></script>
-    <link rel="icon" href="/images/favicon-32x32.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link rel="stylesheet" type="text/css" href="/css/hanzi-graph.css">
+    <script>window.BASE_PATH = '__BASE_PATH__';</script>
+    <script src="__BASE_PATH__/js/external/cytoscape.min.js"></script>
+    <link rel="icon" href="__BASE_PATH__/images/favicon-32x32.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="__BASE_PATH__/images/apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="__BASE_PATH__/css/hanzi-graph.css">
     <style>
         :root {
             --tone-1-color: #ff635f;
@@ -100,7 +101,7 @@
         <div id="left-menu-button-container" class="left-menu-button-container">
             <i id="left-menu-button" class="menu-button"></i>
         </div>
-        <img class="logo" src="/images/hanzigraph-192x192.png"/>
+        <img class="logo" src="__BASE_PATH__/images/hanzigraph-192x192.png"/>
         <h1 id="text-header" style="display:none">HanziGraph</h1>
         <form id="search-form">
             <input id="hanzi-box" aria-label="Pick a hanzi or word" placeholder="Pick a hanzi or word" type="search"
@@ -160,7 +161,7 @@
             </div>
         </main>
     </div>
-    <script type="module" src="/js/components-bundle.js"></script>
+    <script type="module" src="__BASE_PATH__/js/components-bundle.js"></script>
 </body>
 
 </html>

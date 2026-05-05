@@ -144,7 +144,7 @@ function clearIfOutsideSearchControl(event) {
 }
 
 async function initialize(term, mode) {
-    searchSuggestionsWorker = new Worker('/js/modules/search-suggestions-worker.js');
+    searchSuggestionsWorker = new Worker(`${window.BASE_PATH || ''}/js/modules/search-suggestions-worker.js?basePath=${encodeURIComponent(window.BASE_PATH || '')}`);
     sendDataToWorker();
     searchSuggestionsWorker.addEventListener('message', handleWorkerMessage);
     // the worker is sent data and responds once ready. If there's a search term, we may need the data
@@ -340,7 +340,7 @@ function search(value, locale, mode, skipState) {
     // ok, fine, try english?
     if (looksLikeEnglish(value) && getActiveGraph().englishPath) {
         const normalizedValue = value.toLowerCase();
-        fetch(`/${getActiveGraph().englishPath}/${getPartition(normalizedValue, getActiveGraph().partitionCount)}.json`)
+        fetch(`${window.BASE_PATH || ''}/${getActiveGraph().englishPath}/${getPartition(normalizedValue, getActiveGraph().partitionCount)}.json`)
             .then(response => response.json())
             .then(function (data) {
                 if (normalizedValue !== hanziBox.value.toLowerCase()) {

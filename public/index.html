@@ -9,20 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+    <script>window.BASE_PATH = '__BASE_PATH__';</script>
     <script type="module">
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/asset-service-worker.js');
+            navigator.serviceWorker.register(window.BASE_PATH + '/asset-service-worker.js?basePath=' + encodeURIComponent(window.BASE_PATH));
         };
     </script>
-    <script src="/js/data-load.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/hanzi-graph.css">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/images/favicon-32x32.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <script src="__BASE_PATH__/js/data-load.js"></script>
+    <link rel="stylesheet" type="text/css" href="__BASE_PATH__/css/hanzi-graph.css">
+    <link rel="manifest" href="__BASE_PATH__/manifest.json">
+    <link rel="icon" href="__BASE_PATH__/images/favicon-32x32.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="__BASE_PATH__/images/apple-touch-icon.png">
     <link rel="search" type="application/opensearchdescription+xml" title="HanziGraph (simplified)"
-        href="/opensearch-simplified.xml">
+        href="__BASE_PATH__/opensearch-simplified.xml">
     <link rel="search" type="application/opensearchdescription+xml" title="HanziGraph (traditional)"
-        href="/opensearch-traditional.xml">
+        href="__BASE_PATH__/opensearch-traditional.xml">
 </head>
 
 <body>
@@ -372,7 +373,7 @@
                 <span class="emphasized">你好 👋</span> <span id="welcome-message" class="welcome-message"></span>
             </div>
             <div id="signin" class="menu-item">
-                <a id="signin-button" class="active-link" href="/login.html">
+                <a id="signin-button" class="active-link" href="__BASE_PATH__/login.html">
                     <i class="login-icon"></i>Sign in
                 </a>
                 <a id="signout-button" class="active-link" style="display:none">
@@ -446,7 +447,7 @@
                 </form>
             </div>
             <div class="menu-item">
-                <a class="active-link" href="/privacy.html">
+                <a class="active-link" href="__BASE_PATH__/privacy.html">
                     Privacy Info
                 </a>
             </div>
@@ -455,7 +456,7 @@
         </main>
     </div>
     <div id="menu-popover" popover></div>
-    <script type="module" src="/js/bundle.js"></script>
+    <script type="module" src="__BASE_PATH__/js/bundle.js"></script>
 </body>
 
 </html>

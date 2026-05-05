@@ -221,11 +221,13 @@ function buildTries(wordSet, definitions) {
         pinyinNode = pinyinTrie;
     }
 }
+const BASE_PATH = new URL(self.location.href).searchParams.get('basePath') || '';
+
 onmessage = async function (e) {
     if (e.data.type === 'data') {
         const { default: init,
             cut,
-        } = await import("/js/external/jieba_rs_wasm.js");
+        } = await import(BASE_PATH + "/js/external/jieba_rs_wasm.js");
         await init();
         jiebaCut = cut;
         trie = {

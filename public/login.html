@@ -3,9 +3,10 @@
 <head>
     <title>Log In to HanziGraph</title>
     <link rel="stylesheet" type="text/css" href="css/hanzi-graph.css">
+    <script>window.BASE_PATH = '__BASE_PATH__';</script>
     <script type="module">
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./asset-service-worker.js');
+            navigator.serviceWorker.register(window.BASE_PATH + '/asset-service-worker.js?basePath=' + encodeURIComponent(window.BASE_PATH));
         };
     </script>
     <link rel="icon" href="images/favicon-32x32.png" type="image/x-icon">
@@ -14,7 +15,7 @@
 
 <body>
     <header class="header">
-        <div class="exit-container"><a href="/"><i id="faq-exit-button" class="exit-button"></i></a></div>
+        <div class="exit-container"><a href="__BASE_PATH__/"><i id="faq-exit-button" class="exit-button"></i></a></div>
         <div id="header-logo" class="logo freq">汉</div>
         <h1 id="login-header" class="main-header">Sign in</h1>
         <div class="stats-container"></div>

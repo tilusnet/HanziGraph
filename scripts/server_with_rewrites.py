@@ -1,12 +1,33 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import argparse
+import os
 
 BASE_PATH = ''
 
 class RequestHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        global BASE_PATH
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            path = os.path.join(path, 'index.html')
+        if path.endswith('.html'):
+            try:
+                with open(path, 'rb') as f:
+                    content = f.read().replace(b'__BASE_PATH__', BASE_PATH.encode())
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+            except (FileNotFoundError, OSError):
+                self.send_error(404)
+        else:
+            super().do_GET()
+
     # mimic firebase hosting's rewrite rules
     def translate_path(self, request_path):
         global BASE_PATH
+        request_path = request_path.split('?')[0]
         slashed_path = request_path.removeprefix(BASE_PATH)
         crit_blank = slashed_path in ('/', '')
         crit_specials = any([slashed_path.startswith(f"{candidate}") for candidate in (

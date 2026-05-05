@@ -566,7 +566,7 @@ function getUnknownWordHtml(unknownWordCount) {
 // expects callers to ensure augmentation is available
 let augmentExamples = function (word, container, maxExamples) {
     const activeGraph = getActiveGraph();
-    fetch(`/${activeGraph.augmentPath}/${getPartition(word, activeGraph.partitionCount)}.json`)
+    fetch(`${window.BASE_PATH || ''}/${activeGraph.augmentPath}/${getPartition(word, activeGraph.partitionCount)}.json`)
         .then(response => response.json())
         .then(function (data) {
             if (!container) {
@@ -580,7 +580,7 @@ let augmentExamples = function (word, container, maxExamples) {
 
 let augmentDefinitions = function (word, container) {
     const activeGraph = getActiveGraph();
-    fetch(`/${activeGraph.definitionsAugmentPath}/${getPartition(word, activeGraph.partitionCount)}.json`)
+    fetch(`${window.BASE_PATH || ''}/${activeGraph.definitionsAugmentPath}/${getPartition(word, activeGraph.partitionCount)}.json`)
         .then(response => response.json())
         .then(function (data) {
             if (!container) {
@@ -1072,7 +1072,7 @@ let setupExamples = function (words, type, skipState, allowExplain, aiData) {
 
 let persistNavigationState = function (words) {
     const activeGraph = getActiveGraph();
-    const newUrl = `/${activeGraph.prefix}/${words}`;
+    const newUrl = `${window.BASE_PATH || ''}/${activeGraph.prefix}/${words}`;
     document.title = `${words} | ${activeGraph.display}`;
     history.pushState({
         word: words,
@@ -1094,10 +1094,10 @@ let getCardFromDefinitions = function (text, definitionList) {
 let fetchStats = function () {
     const activeGraph = getActiveGraph();
     if (activeGraph.hasCoverage === 'all') {
-        fetch(`/data/${activeGraph.prefix}/coverage_stats.json`)
+        fetch(`${window.BASE_PATH || ''}/data/${activeGraph.prefix}/coverage_stats.json`)
             .then(response => response.json())
             .then(data => coverageGraph = data);
-        fetch(`/data/${activeGraph.prefix}/character_freq_list.json`)
+        fetch(`${window.BASE_PATH || ''}/data/${activeGraph.prefix}/character_freq_list.json`)
             .then(response => response.json())
             .then(data => {
                 charFreqs = {}
