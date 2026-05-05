@@ -509,18 +509,21 @@ let setupExampleElements = function (word, examples, exampleList, defaultSource)
         let tagContainer = document.createElement('div');
         tagContainer.classList.add('tags');
         const sourceKey = examples[i].source || defaultSource;
+        const sourceTag = document.createElement('span');
+        sourceTag.classList.add('tag', 'nowrap');
         if (sourceKey in sources) {
             const source = sources[sourceKey];
-            const sourceTag = document.createElement('span');
-            sourceTag.classList.add('tag', 'nowrap');
             // innerHTML should be safe since we check that sourceKey is in our sources allowlist
             if (source.link) {
                 sourceTag.innerHTML = `<span class="deemphasized">Source: <a href="${source.link}">${source.display}</a></span>`;
             } else {
                 sourceTag.innerHTML = `<span class="deemphasized">Source: ${source.display}</span>`;
             }
-            tagContainer.appendChild(sourceTag);
+        } else {
+            sourceTag.textContent = `Source: ${sourceKey}`;
+            sourceTag.classList.add('deemphasized');
         }
+        tagContainer.appendChild(sourceTag);
         if (charFreqs) {
             const uniqueChars = [...new Set([...examples[i].zh.join('')])];
             const knownUniqueChars = uniqueChars.filter(x => !!charFreqs[x]);
