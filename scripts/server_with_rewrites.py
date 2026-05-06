@@ -1,4 +1,4 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 import argparse
 import os
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         assert BASE_PATH[0] == '/', '--base-path must start with /'
         if BASE_PATH[-1] == '/':
             BASE_PATH = BASE_PATH[:-1]
-    myServer = HTTPServer(('0.0.0.0', port), RequestHandler)
+    myServer = ThreadingHTTPServer(('0.0.0.0', port), RequestHandler)
     print("HanziGraph started")
     try:
         myServer.serve_forever()
