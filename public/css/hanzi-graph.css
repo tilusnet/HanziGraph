@@ -623,6 +623,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_a
     background-color: #e8f0fe;
 }
 
+@media (prefers-color-scheme: dark) {
+    .custom-source {
+        background-color: #1a2a4a;
+    }
+}
+
 .word-header {
     font-family: var(--primary-font);
     user-select: none;
