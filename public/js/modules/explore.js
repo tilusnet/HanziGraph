@@ -241,18 +241,21 @@ let setupDefinitions = function (word, definitionList, container) {
 let findExamples = function (word, sentences, max) {
     max = max || maxExamples;
     let examples = [];
+    let customExamples = [];
     //used for e.g., missing translation
     let lessDesirableExamples = [];
     //TODO consider indexing up front
     //can also reuse inner loop...consider inverting
     for (let i = 0; i < sentences.length; i++) {
         if (sentences[i].zh.includes(word) || (word.length === 1 && sentences[i].zh.join('').includes(word))) {
+            const isCustom = sentences[i].source && !(sentences[i].source in sources);
             if (sentences[i].en && sentences[i].pinyin) {
-                examples.push(sentences[i]);
-                if (examples.length === max) {
-                    break;
+                if (isCustom) {
+                    customExamples.push(sentences[i]);
+                } else if (examples.length < max) {
+                    examples.push(sentences[i]);
                 }
-            } else if (lessDesirableExamples.length < max) {
+            } else if (!isCustom && lessDesirableExamples.length < max) {
                 lessDesirableExamples.push(sentences[i]);
             }
         }
@@ -270,7 +273,7 @@ let findExamples = function (word, sentences, max) {
             return a.zh.length - b.zh.length;
         }
     });
-    return examples;
+    return [...customExamples, ...examples];
 };
 let addTextToSpeech = function (container, text, aList) {
     let textToSpeechButton = document.createElement('span');
