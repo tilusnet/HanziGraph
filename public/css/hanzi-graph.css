@@ -619,6 +619,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_a
     opacity: 0.8;
 }
 
+.custom-source {
+    background-color: #e8f0fe;
+}
+
 .word-header {
     font-family: var(--primary-font);
     user-select: none;

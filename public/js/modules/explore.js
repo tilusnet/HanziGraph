@@ -512,6 +512,9 @@ let setupExampleElements = function (word, examples, exampleList, defaultSource)
         let tagContainer = document.createElement('div');
         tagContainer.classList.add('tags');
         const sourceKey = examples[i].source || defaultSource;
+        if (!(sourceKey in sources)) {
+            exampleHolder.classList.add('custom-source');
+        }
         const sourceTag = document.createElement('span');
         sourceTag.classList.add('tag', 'nowrap');
         if (sourceKey in sources) {
